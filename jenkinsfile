@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    
+    stages {
+        // Stage 1: Checkout Code
+        stage('Checkout') {
+            steps {
+                checkout scm  
+            }
+        }
+
+        // Stage 2: Build
+        stage('Build') {
+            steps {
+                script {
+                    echo 'Building the application...'
+                }
+            }
+            post {
+                always {
+                    echo 'Build stage finished.'
+                }
+                success {
+                    echo 'Build completed successfully.'
+                }
+                failure {
+                    echo 'Build failed.'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
