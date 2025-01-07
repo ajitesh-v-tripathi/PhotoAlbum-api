@@ -5,7 +5,9 @@ FROM maven:3.8-openjdk-17 as builder
 WORKDIR /app
 
 # Copy the pom.xml and download dependencies
-COPY pom.xml .
+# Copy the entire Git repository including .git
+COPY . /app
+
 RUN mvn dependency:go-offline
 
 # Copy the source code
