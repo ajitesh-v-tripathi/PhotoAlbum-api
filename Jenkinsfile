@@ -1,4 +1,4 @@
-@Library('vars') _
+@Library('my-shared-library') _
 
 pipeline {
     agent {label 'java-slave'}
