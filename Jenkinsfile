@@ -1,4 +1,4 @@
-@Library('PhotoAlbum-api') _
+@Library('vars') _
 
 pipeline {
     agent {label 'java-slave'}
