@@ -2,7 +2,7 @@ pipeline {
     agent { label 'java-slave' }
     environment {
         DOCKER_IMAGE = 'ajiteshviva/j2g'
-        DOCKER_TAG = "${env.BRANCH_NAME}-${env.GIT_COMMIT.take(7)}"
+        DOCKER_TAG = "${env.GIT_BRANCH ?: 'unknown'}-${env.GIT_COMMIT.take(7)}"
     }
     stages {
         stage('Checkout') {
