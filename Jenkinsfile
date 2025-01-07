@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'java-slave' }
     environment {
         DOCKER_IMAGE = 'ajiteshviva/j2g'
         DOCKER_TAG = 'latest' // You can use dynamic tags if necessary
