@@ -1,4 +1,4 @@
-@Library('my-shared-library') _
+@Library('PhotoAlbum-api') _
 
 pipeline {
     agent {label 'java-slave'}
