@@ -2,7 +2,7 @@ pipeline {
     agent { label 'java-slave' }
     environment {
         DOCKER_IMAGE = 'ajiteshviva/j2g'
-        DOCKER_TAG = 'latest' // You can use dynamic tags if necessary
+        DOCKER_TAG = "${env.BRANCH_NAME}-${env.GIT_COMMIT.take(7)}"
     }
     stages {
         stage('Checkout') {
