@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'java-slave' }
+    agent { any }
     environment {
         DOCKER_IMAGE = 'ajiteshviva/j2g'
         DOCKER_TAG = "${env.GIT_BRANCH.replaceAll('/', '-')}-${env.BUILD_ID}"
