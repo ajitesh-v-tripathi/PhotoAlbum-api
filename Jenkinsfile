@@ -33,7 +33,6 @@ pipeline {
             steps {
                 script {
                     // Push the Docker image to Docker Hub
-                    sh "docker login" 
                     sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 }
             }
