@@ -11,6 +11,12 @@ pipeline {
                 checkout scm
             }
         }
+    stages {
+        stage('testing') {
+            steps {
+                sh "testing the code repository"
+            }
+        }        
         stage('Build Docker Image') {
             steps {
                 script {
