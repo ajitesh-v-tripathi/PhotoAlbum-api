@@ -1,0 +1,64 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - test  
+  - build
+
+variables:
+  DOCKER_IMAGE: "registry.gitlab.com/my-test-group9983745/migration-organisation/photoalbum-api"
+  DOCKER_TAG: "${CI_COMMIT_BRANCH}-${CI_PIPELINE_ID}"
+
+code_testing:
+    stage: test
+    script:
+        - echo "testing code!!"
+
+build_docker_image:
+  stage: build
+  script:
+    - docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
+    - echo "$DOCKER_PASSWORD" | docker login registry.gitlab.com -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $DOCKER_IMAGE:$DOCKER_TAG
+
+after_script:
+  - |
+    if [[ $CI_JOB_STATUS == "success" ]]; then
+      echo "Docker image successfully pushed to Docker Hub."
+    else
+      echo "Build or push failed."
+    fi
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - test  
+  - build
+
+variables:
+  DOCKER_IMAGE: "registry.gitlab.com/my-test-group9983745/migration-organisation/photoalbum-api"
+  DOCKER_TAG: "${CI_COMMIT_BRANCH}-${CI_PIPELINE_ID}"
+
+code_testing:
+    stage: test
+    script:
+        - echo "testing code!!"
+
+build_docker_image:
+  stage: build
+  script:
+    - docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
+    - echo "$DOCKER_PASSWORD" | docker login registry.gitlab.com -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $DOCKER_IMAGE:$DOCKER_TAG
+
+after_script:
+  - |
+    if [[ $CI_JOB_STATUS == "success" ]]; then
+      echo "Docker image successfully pushed to Docker Hub."
+    else
+      echo "Build or push failed."
+    fi
