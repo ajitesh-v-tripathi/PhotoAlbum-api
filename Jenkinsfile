@@ -1,4 +1,4 @@
-@Library('my-shared-library@istone') _
+@Library('my-shared-library@i-stone') _
 
 pipeline {
     agent { label 'java-slave' }
