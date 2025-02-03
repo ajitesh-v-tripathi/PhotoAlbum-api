@@ -1,0 +1,8 @@
+# templates/build.yml
+build_docker_image:
+  stage: build
+  script:
+    - docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
+    - echo "$DOCKER_PASSWORD" | docker login registry.gitlab.com -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $DOCKER_IMAGE:$DOCKER_TAG
+

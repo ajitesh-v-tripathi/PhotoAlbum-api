@@ -1,0 +1,29 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - test
+  - build
+
+variables:
+  DOCKER_IMAGE: "registry.gitlab.com/my-test-group9983745/migration-organisation/photoalbum-api"
+  DOCKER_TAG: "${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}"
+
+# Include the shared templates
+include:
+  - project: 'migration-organisation/ci-templates-repo'
+    file: '/templates/test.yml'
+  - project: 'migration/ci-templates-repo'
+    file: '/templates/build.yml'
+
+# Optionally, you can add custom after_script or other logic if needed
+after_script:
+  - |
+    if [[ $CI_JOB_STATUS == "success" ]]; then
+      echo "Docker image successfully pushed to Docker Hub."
+    else
+      echo "Build or push failed."
+    fi
+
